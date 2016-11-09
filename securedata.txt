@@ -1,0 +1,3 @@
+Saluki,racinginsand,Feather,Hound,stars
+Sheep,dog,English,Brit,carry
+Golden,goal,snao,Doofle,peg

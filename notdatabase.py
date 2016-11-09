@@ -2,41 +2,51 @@ import csv
 
 
 def get_name():
-    name1 = input("Please enter your username to login:  ")
+    return input("Please enter your username to login:  ")
 
 
 def get_pass():
-    pass1 = input("Enter your password to complete your login:  ")
+    return input("Enter your password to complete your login:  ")
 
 
 def try_login():
     while True:
-        dictionary1 = {}
+        dictionary1 = []
         keyname = get_name()
         passname = get_pass()
         with open('securedata.txt') as f:
-            skimlist = csv.DictReader(f, delimiter=",", fieldnames=['username', 'password', 'firstname', 'lastname', 'email'])
+            header = ['username', 'password', 'firstname', 'lastname', 'email']
+            skimlist = csv.DictReader(f, fieldnames=header, delimiter=',')
             for row in skimlist:
-                dictionary1.update(row)
-                print(dictionary1)
+                dictionary1.append(row)
         for line in dictionary1:
-    #        if line[username] == keyname and line[password] == passname:
-            return True
+            if line['username'] == keyname and line['password'] == passname:
+                return True
 
 
 def write_in(full_list):
     data = full_list
+    print(data)
     with open('securedata.txt', 'w') as f:
-        f.write(','.join(full_list))
+        header = ['username', 'password', 'firstname', 'lastname', 'email']
+        newfile = csv.DictWriter(f, fieldnames=header)
+        newfile = csv.writer(f)
+        valuelist = []
+        for row in data:
+            valuelist.append(row.values())
+        print(valuelist)
+        newfile.writerows(valuelist)
 
 
 def add_new_user():
+    cat = 'green'
     temp = []
-    with open('securedata.txt', 'w') as f:
-        storage = csv.DictReader(f)
+    with open('securedata.txt') as f:
+        header = ['username', 'password', 'firstname', 'lastname', 'email']
+        storage = csv.DictReader(f, fieldnames=header, delimiter=',')
         for line in storage:
             temp.append(line)
-    while True:
+    while cat == 'green':
         newname = input("Please enter a new username: ")
         if newname in temp:
             print("That username is taken. Please choose a different one.")
@@ -46,20 +56,16 @@ def add_new_user():
                 newfirst = input("Please enter your first name: ")
                 newlast = input("Please enter your last name: ")
                 newemail = input("Please provide an e-mail address: ")
-                if ((3 < len(passpaw) < 16) and (',' not in passpaw) and
-                (1 < len(newfirst) < 19) and (',' not in newfirst)
-                and (3 < len(newlast) < 31) and (',' not in newlast)
-                and (3 < len(newemail) < 31) and (',' not in newemail)
-                and (2 < len(newname) < 20) and (',' not in newname)):
-                    newuser = [newname, passpaw, newfirst, newlast, newemail]
+                if ((',' not in passpaw) and (',' not in newfirst) and
+                    (',' not in newlast) and (',' not in newemail) and
+                    (',' not in newname)):
+                    newuser = {'username': newname, 'password': passpaw, 'firstname': newfirst, 'lastname': newlast, 'email': newemail}
                     temp.append(newuser)
                     write_in(temp)
+                    cat = 'blue'
                     break
                 else:
-                    print("""Please keep the password between 4 and 15
-                            characters, the first name between 2 and 18,
-                            the last name between 2 and 30, and the e-mail
-                            address between 4 and 30""")
+                    print("Please do not include commas")
 
 
 def logged_in_options():
@@ -72,6 +78,7 @@ def logged_in_options():
             return
         else:
             continue
+
 
 def main():
     while True:
