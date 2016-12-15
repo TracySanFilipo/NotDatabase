@@ -4,3 +4,4 @@ Great,giants,Zeus,Cloud,spacesaver@dogmail.com
 West,notfromkansas,Tuff,Terrier,determineddigger@dogmail.com
 Akita,loyaltograve,Fluff,Guard,independencedog@dogmail.com
 Golden,birdcatcher,Feather,Hunter,retrieves@dogmail.com
+Schnauzzy,companionshipconstant,Determined,Heeler,alwaysthere@dogmail.com

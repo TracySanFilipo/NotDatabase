@@ -20,14 +20,12 @@ def try_login():
             for row in skimlist:
                 dictionary1.append(row)
         for line in dictionary1:
-            print(line)
             if line['username'] == keyname and line['password'] == passname:
                 return True
 
 
 def write_in(full_list):
     data = full_list
-    print(data)
     with open('securedata.txt', 'w') as f:
         header = ['username', 'password', 'firstname', 'lastname', 'email']
         newfile = csv.DictWriter(f, fieldnames=header)
@@ -35,7 +33,6 @@ def write_in(full_list):
         valuelist = []
         for row in data:
             valuelist.append([row['username'], row['password'], row['firstname'], row['lastname'], row['email']])
-        print(valuelist)
         newfile.writerows(valuelist)
 
 
@@ -48,7 +45,6 @@ def add_new_user():
         storage = csv.DictReader(f, fieldnames=header, delimiter=',')
         for line in storage:
             temp.append(line)
-    print(temp)
     while cat == 'green':
         for line in temp:
             user_list.append(line['username'])
