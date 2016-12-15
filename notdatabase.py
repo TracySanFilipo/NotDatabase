@@ -20,6 +20,7 @@ def try_login():
             for row in skimlist:
                 dictionary1.append(row)
         for line in dictionary1:
+            print(line)
             if line['username'] == keyname and line['password'] == passname:
                 return True
 
@@ -33,7 +34,7 @@ def write_in(full_list):
         newfile = csv.writer(f)
         valuelist = []
         for row in data:
-            valuelist.append(row.values())
+            valuelist.append([row['username'], row['password'], row['firstname'], row['lastname'], row['email']])
         print(valuelist)
         newfile.writerows(valuelist)
 
@@ -41,14 +42,18 @@ def write_in(full_list):
 def add_new_user():
     cat = 'green'
     temp = []
+    user_list = []
     with open('securedata.txt') as f:
         header = ['username', 'password', 'firstname', 'lastname', 'email']
         storage = csv.DictReader(f, fieldnames=header, delimiter=',')
         for line in storage:
             temp.append(line)
+    print(temp)
     while cat == 'green':
+        for line in temp:
+            user_list.append(line['username'])
         newname = input("Please enter a new username: ")
-        if newname in temp:
+        if (newname in user_list) or (',' in newname):
             print("That username is taken. Please choose a different one.")
         else:
             while True:
@@ -57,8 +62,7 @@ def add_new_user():
                 newlast = input("Please enter your last name: ")
                 newemail = input("Please provide an e-mail address: ")
                 if ((',' not in passpaw) and (',' not in newfirst) and
-                    (',' not in newlast) and (',' not in newemail) and
-                    (',' not in newname)):
+                    (',' not in newlast) and (',' not in newemail)):
                     newuser = {'username': newname, 'password': passpaw, 'firstname': newfirst, 'lastname': newlast, 'email': newemail}
                     temp.append(newuser)
                     write_in(temp)
@@ -72,9 +76,9 @@ def logged_in_options():
     while True:
         decisions = input("""Would you like to create a new login(n),
                             or logout(l)?  """)
-        if decisions.lower() == 'n':
+        if decisions.lower() in ['n', 'login', 'new']:
             add_new_user()
-        elif decisions.lower() == 'l':
+        elif decisions.lower() in ['l', 'logout']:
             return
         else:
             continue

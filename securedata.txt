@@ -1,3 +1,6 @@
-Saluki,racinginsand,Feather,Hound,stars
-Sheep,dog,English,Brit,carry
-Golden,goal,snao,Doofle,peg
+Saluki,racinginsand,Feather,Hound,sandhound@dogmail.com
+English,sheep,Fuzzy,Herder,hillwatcher@dogmail.com
+Great,giants,Zeus,Cloud,spacesaver@dogmail.com
+West,notfromkansas,Tuff,Terrier,determineddigger@dogmail.com
+Akita,loyaltograve,Fluff,Guard,independencedog@dogmail.com
+Golden,birdcatcher,Feather,Hunter,retrieves@dogmail.com
